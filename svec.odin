@@ -1,5 +1,8 @@
 package svec
 
+import runtime "core:runtime"
+import builtin "core:builtin"
+
 /** A static vector of type $T, size $N, which stores elements inline. */
 SVec :: struct(T: typeid, N: int) {
   data: [N]T,
@@ -8,6 +11,13 @@ SVec :: struct(T: typeid, N: int) {
 
 make :: proc($T: typeid, $N: int) -> SVec(T, N) {
   return SVec(T, N) { len=0 };
+}
+
+make_elems :: proc($N: int, vals: ..$T) -> SVec(T, N) {
+  ret := make(T, N);
+  runtime.mem_copy(&ret.data[0], &vals[0], size_of(T) * builtin.len(vals));
+  ret.len = N;
+  return ret;
 }
 
 /** Returns true on success */

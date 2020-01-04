@@ -3,6 +3,14 @@ package svec_tests
 import svec ".."
 import "core:fmt"
 
+test_make_elems :: proc() {
+  my_svec := svec.make_elems(3, 1, 2, 3);
+  assert(my_svec.len == 3);
+  assert(my_svec.data[0] == 1);
+  assert(my_svec.data[1] == 2);
+  assert(my_svec.data[2] == 3);
+}
+
 test_append :: proc() {
   my_svec := svec.make(int, 4);
   assert(svec.try_append(&my_svec, 1));
@@ -46,6 +54,8 @@ test_len :: proc() {
 }
 
 main :: proc() {
+  fmt.println("Testing make_elems");
+  test_make_elems();
   fmt.println("Testing append");
   test_append();
   fmt.println("Testing pop");
