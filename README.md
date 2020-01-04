@@ -13,7 +13,7 @@ odin run tests --out:svec-tests
 ## Usage
 
 ```go
-import svec "svec"
+import svec "odin-svec"
 
 // ...
 
